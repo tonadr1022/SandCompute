@@ -15,6 +15,23 @@ std::optional<std::string> LoadFromFile(const std::string &path) {
   }
   return s_stream.str();
 }
+std::optional<std::string> LoadFromFile(
+    const std::string &path, const std::vector<std::pair<std::string, std::string>> &defines) {
+  std::ifstream file_stream(path);
+  std::string line;
+  std::stringstream s_stream;
+  if (!file_stream.is_open()) return std::nullopt;
+  // get version line
+  std::getline(file_stream, line);
+  s_stream << line << '\n';
+  for (const auto &[name, def] : defines) {
+    s_stream << "#define " << name << ' ' << def << '\n';
+  }
+  while (std::getline(file_stream, line)) {
+    s_stream << line << '\n';
+  }
+  return s_stream.str();
+}
 }  // namespace util
 
 ShaderManager *ShaderManager::instance_ = nullptr;
@@ -47,6 +64,12 @@ std::optional<Shader> ShaderManager::GetShader(const std::string &name) {
 
 std::optional<Shader> ShaderManager::AddShader(
     const std::string &name, const std::vector<ShaderCreateInfo> &create_info_vec) {
+  auto existing_it = shader_data_.find(name);
+  if (existing_it != shader_data_.end()) {
+    glDeleteProgram(existing_it->second.program_id);
+    shader_data_.erase(name);
+  }
+
   auto result = ShaderManager::CompileProgram(name, create_info_vec);
   if (!result.has_value()) {
     return std::nullopt;
@@ -95,7 +118,7 @@ std::optional<ShaderManager::ShaderProgramData> ShaderManager::CompileProgram(
     const std::string &name, const std::vector<ShaderCreateInfo> &create_info_vec) {
   std::vector<uint32_t> shader_ids;
   for (const auto &create_info : create_info_vec) {
-    auto src = util::LoadFromFile(create_info.shaderPath);
+    auto src = util::LoadFromFile(create_info.shaderPath, create_info.defines);
     if (!src.has_value()) {
       spdlog::error("Failed to load from file {}", create_info.shaderPath);
       return std::nullopt;

@@ -9,6 +9,7 @@ enum class ShaderType { kVertex, kFragment, kGeometry, kCompute };
 struct ShaderCreateInfo {
   std::string shaderPath;
   ShaderType shaderType;
+  std::vector<std::pair<std::string, std::string>> defines;
 };
 
 class ShaderManager {

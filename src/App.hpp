@@ -12,6 +12,7 @@ class App {
   bool imgui_enabled_{true};
   void OnEvent(const SDL_Event& event);
   void OnImGui();
+  static constexpr const uint32_t kWorkGroupX = 10, kWorkGroupY = 10;
 };
 
 }  // namespace sand
