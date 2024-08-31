@@ -1,6 +1,6 @@
 #include "Shader.hpp"
 
-namespace sand {
+namespace gl {
 
 void Shader::Bind() const {
   EASSERT_MSG(id_ != 0, "Shader is invalid");
@@ -73,4 +73,4 @@ void Shader::SetBool(const std::string& name, bool value) {
 Shader::Shader(uint32_t id, std::unordered_map<std::string, uint32_t>& uniform_locations)
     : id_(id), uniform_locations_(uniform_locations) {}
 
-}  // namespace sand
+}  // namespace gl

@@ -1,5 +1,7 @@
 #include "Buffer.hpp"
 
+namespace gl {
+
 Buffer::Buffer() = default;
 
 Buffer::~Buffer() {
@@ -53,3 +55,5 @@ void Buffer::Unmap() {
   mapped_ = false;
   glUnmapNamedBuffer(id_);
 }
+
+}  // namespace gl

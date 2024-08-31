@@ -289,4 +289,15 @@ float Window::GetAspectRatio() const {
 
 void Window::SetTitle(std::string_view title) { SDL_SetWindowTitle(window_, title.data()); }
 
+glm::ivec2 Window::GetWindowSize() const { return {window_width_, window_height_}; }
+
+glm::ivec2 Window::GetMousePosition() const {
+  int x;
+  int y;
+  SDL_GetMouseState(&x, &y);
+  return {x, y};
+}
+
+glm::ivec2 Window::GetWindowCenter() const { return GetWindowSize() / 2; }
+
 }  // namespace sand

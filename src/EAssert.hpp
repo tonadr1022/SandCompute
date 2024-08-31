@@ -2,8 +2,6 @@
 
 #include <spdlog/spdlog.h>
 
-namespace sand {
-
 void HandleAssert(const char* msg, const char* condition, const char* filename,
                   uint64_t lineNumber);
 
@@ -35,5 +33,3 @@ void HandleAssert(const char* msg, const char* condition, const char* filename,
   } while (0)
 
 #endif  // !NDEBUG
-
-}  // namespace sand

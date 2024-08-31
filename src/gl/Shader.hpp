@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sand {
+namespace gl {
 
 // Lightweight object containing id and reference to uniform locations stored in the manager.
 // This is a wrapper to access the shader and set uniforms
@@ -32,4 +32,4 @@ class Shader {
   std::unordered_map<std::string, uint32_t>& uniform_locations_;
 };
 
-}  // namespace sand
+}  // namespace gl

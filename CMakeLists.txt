@@ -13,6 +13,7 @@ find_package(OpenGL REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(imgui CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
 
 
 add_compile_definitions(SRC_PATH="${CMAKE_SOURCE_DIR}/")

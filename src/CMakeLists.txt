@@ -10,6 +10,8 @@ EAssert.cpp
 gl/Shader.cpp
 gl/VertexArray.cpp
 gl/Buffer.cpp
+gl/Texture.cpp
+sand_sim/SandSim.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
@@ -29,5 +31,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
     imgui::imgui
     GLEW::GLEW
+    glm::glm
     spdlog::spdlog
 )

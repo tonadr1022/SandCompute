@@ -1,5 +1,6 @@
 #include "VertexArray.hpp"
 
+namespace gl {
 void VertexArray::Bind() const { glBindVertexArray(id_); }
 
 void VertexArray::Init() { glCreateVertexArrays(1, &id_); }
@@ -29,3 +30,4 @@ void VertexArray::EnableAttributeInternal(size_t index, size_t size, uint32_t re
   }
   glVertexArrayAttribBinding(id_, index, 0);
 }
+}  // namespace gl

@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-namespace sand {
+namespace gl {
 
 namespace util {
 std::optional<std::string> LoadFromFile(const std::string &path) {
@@ -195,4 +195,4 @@ void ShaderManager::RecompileShaders() {
   }
 }
 
-}  // namespace sand
+}  // namespace gl

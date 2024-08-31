@@ -1,6 +1,6 @@
 #include "OpenGLDebug.hpp"
 
-namespace sand {
+namespace gl {
 
 // adapted from https://learnopengl.com/In-Practice/Debugging
 void GLAPIENTRY MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity,
@@ -94,4 +94,4 @@ void GLAPIENTRY MessageCallback(GLenum source, GLenum type, GLuint id, GLenum se
 
   EASSERT(0);
 }
-}  // namespace sand
+}  // namespace gl

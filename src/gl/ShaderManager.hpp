@@ -2,8 +2,7 @@
 
 #include "Shader.hpp"
 
-namespace sand {
-
+namespace gl {
 enum class ShaderType { kVertex, kFragment, kGeometry, kCompute };
 
 struct ShaderCreateInfo {
@@ -41,4 +40,4 @@ class ShaderManager {
   std::unordered_map<std::string, ShaderProgramData> shader_data_;
 };
 
-}  // namespace sand
+}  // namespace gl

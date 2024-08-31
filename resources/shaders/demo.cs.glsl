@@ -7,6 +7,7 @@ layout(r32ui, binding = 1) uniform uimage2D img_output;
 
 uniform int grid_size_x;
 uniform int grid_size_y;
+uniform int modification_count = 0;
 
 const int MAT_None = 0;
 const int MAT_Sand = 1;
@@ -28,9 +29,30 @@ struct Cell {
     int material;
 };
 
+uint SHAPE_Circle = 0;
+uint SHAPE_Square = 1;
+struct Modification {
+    ivec2 pos;
+    float radius;
+    uint shape;
+    int material;
+};
+
+layout(std430, binding = 0) readonly buffer ModBuffer {
+    Modification modifications[];
+};
+
 Cell new_cell(uint data);
 
 Cell simulate(ivec2 pos);
+
+bool is_inside_circle(ivec2 pos, ivec2 circle_pos, float radius) {
+    return (pos.x - circle_pos.x) * (pos.x - circle_pos.x) + (pos.y - circle_pos.y) * (pos.y - circle_pos.y) < radius;
+}
+
+void set_cell(ivec2 pos, Cell cell) {
+    imageStore(img_output, pos, ivec4(Pack(cell.material), 0, 0, 0));
+}
 
 void main() {
     ivec2 pos = ivec2(gl_GlobalInvocationID.xy);
@@ -38,8 +60,18 @@ void main() {
         return;
     }
 
+    for (int i = 0; i < modification_count; i++) {
+        if (modifications[i].shape == SHAPE_Circle) {
+            if (is_inside_circle(pos, modifications[i].pos, modifications[i].radius)) {
+                Cell c = new_cell(modifications[i].material);
+                set_cell(pos, c);
+                return;
+            }
+        } else {}
+    }
+
     Cell cell = simulate(pos);
-    imageStore(img_output, pos, ivec4(Pack(cell.material), 0, 0, 0));
+    set_cell(pos, cell);
 }
 
 Cell simulate(ivec2 pos) {

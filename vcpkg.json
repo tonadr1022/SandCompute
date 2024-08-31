@@ -3,6 +3,7 @@
     "sdl2",
     "glew",
     "spdlog",
+    "glm",
     {
       "name": "imgui",
       "features": ["opengl3-binding", "sdl2-binding"]

@@ -1,5 +1,7 @@
 #pragma once
 
+namespace gl {
+
 class VertexArray {
  public:
   VertexArray();
@@ -32,3 +34,5 @@ class VertexArray {
   void EnableAttributeInternal(size_t index, size_t size, uint32_t relative_offset, uint32_t type,
                                bool is_integral) const;
 };
+
+}  // namespace gl

@@ -1,5 +1,7 @@
 #pragma once
 
+namespace gl {
+
 class Buffer {
  public:
   Buffer();
@@ -29,3 +31,4 @@ class Buffer {
   uint32_t id_{0};
   bool mapped_{false};
 };
+}  // namespace gl
